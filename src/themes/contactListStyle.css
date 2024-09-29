@@ -1,0 +1,43 @@
+.contactListContainer {
+    padding: 10px;
+}
+
+.contactListHeading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.contactListHeading button {
+    height: 35px;
+    width: 100px;
+    margin-top: 10px;
+    background-color: rgb(21, 114, 172);
+    color: white;
+    font-size: 14px;
+    border-width: 0px;
+    border-radius: 2px;
+}
+
+.searchContainer {
+    border: 1px solid rgb(199, 193, 193);
+    height: 40px;
+    border-radius: 6px;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.textSearchContainer {
+    padding: 10px;
+}
+
+.searchContainer input {
+    height: 35px;
+    width: 100%;
+    border-width: 0px;
+    outline: none;
+    border-color: initial;
+    padding-left: 10px
+}

@@ -1,0 +1,15 @@
+.displayDetails {
+    display: flex;
+    flex-direction: column;
+}
+
+.detailsButton {
+    margin: 10px 0px 10px 0px;
+    background-color: rgb(32, 136, 200);
+    color: white;
+    font-size: 14px;
+    border-width: 0px;
+    border-radius: 2px;
+    height: 30px;
+    width: 150px;
+}

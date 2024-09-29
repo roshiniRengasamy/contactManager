@@ -1,0 +1,24 @@
+.listContainer {
+    padding: 10px 0px 10px 0px;
+    border-width: 0px 0px 1px 0px;
+    border-color: rgb(192, 189, 189);
+    border-style: solid;
+    display: flex;
+    flex-direction: row;
+}
+
+.textContainer {
+    display: flex;
+    flex-direction: column;
+    width: 98%;
+    cursor: pointer;
+}
+
+.iconContainer {
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.user {
+    padding: 5px 10px 5px 10px;
+}
