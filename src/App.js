@@ -3,7 +3,7 @@ import AddContact from './components/addContact';
 import ContactList from './components/contactList';
 import Header from './components/header';
 import { v4 as uuid } from 'uuid';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import ContactDetails from './components/contactDetails';
 import api from './services/contacts';
 import EditContact from './components/editContact';
@@ -31,9 +31,9 @@ function App() {
     getContacts()
   }, [])
 
-  useEffect(() => {
-    // localStorage.setItem(localStorageKey, JSON.stringify(contactList))
-  }, [contactList])
+  // useEffect(() => {
+  // localStorage.setItem(localStorageKey, JSON.stringify(contactList))
+  // }, [contactList])
 
   const addContact = async (contact) => {
     let payload = {
@@ -77,7 +77,7 @@ function App() {
 
   return (
     <div style={{ fontFamily: 'sans-serif' }}>
-      <Router>
+      <HashRouter>
         <Header />
         <Routes>
           <Route path='/' element={
@@ -90,7 +90,7 @@ function App() {
           <Route path='/edit/:id' element={<EditContact updateContact={updateContact} />} />
           <Route path='/view/:id' element={<ContactDetails />} />
         </Routes>
-      </Router>
+      </HashRouter>
     </div>
   );
 }
