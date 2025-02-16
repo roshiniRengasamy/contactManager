@@ -23,9 +23,12 @@ const ContactList = ({ contactList, deleteContact, searchText, searchContact }) 
                     <IoSearch />
                 </div>
             </div>
-            {contactList && contactList.map((item, index) => (
+            {contactList?.length ? contactList.map((item, index) => (
                 <ContactCard key={item.id} item={item} deleteContact={deleteContact} />
-            ))}
+            ))
+                :
+                <div style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', height: 200 }}>Loading ...</div>
+            }
         </div>
     )
 }
