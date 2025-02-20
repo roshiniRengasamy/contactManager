@@ -13,22 +13,18 @@ function App() {
   const [contactList, setContactList] = useState([])
   const [searchContactList, setSearchContactList] = useState([])
   const [searchText, setSearchText] = useState('')
+  const [isLoading, setIsLoading] = useState(true)
 
   const retriveContacts = async () => {
     let response = await api.get('/contacts')
-    return response.data
+    setContactList(response.data)
+    setIsLoading(false)
   }
 
   useEffect(() => {
-    // const retriveContacts = JSON.parse(localStorage.getItem(localStorageKey))
-    // if (retriveContacts?.length) {
-    //   setContactList(retriveContacts)
-    // }
-    const getContacts = async () => {
-      let contacts = await retriveContacts()
-      setContactList(contacts)
-    }
-    getContacts()
+    console.log('---')
+    setIsLoading(true)
+    retriveContacts()
   }, [])
 
   // useEffect(() => {
@@ -36,6 +32,7 @@ function App() {
   // }, [contactList])
 
   const addContact = async (contact) => {
+    setIsLoading(true)
     let payload = {
       id: uuid(),
       ...contact
@@ -43,18 +40,22 @@ function App() {
     let response = await api.post('/contacts', payload)
     // setContacts([...contacts, { id: uuid(), ...contact }]);
     setContactList([...contactList, response.data])
+    setIsLoading(false)
   }
 
   const updateContact = async (contact) => {
+    setIsLoading(true)
     let response = await api.put(`/contacts/${contact.id}`, contact)
     // setContacts([...contacts, { id: uuid(), ...contact }]);
     let { id } = contact
     setContactList(contactList.map((contact) => {
       return contact.id === id ? { ...response.data } : contact
     }))
+    setIsLoading(false)
   }
 
   const searchContact = (search) => {
+    setIsLoading(true)
     setSearchText(search)
     const newContactList = contactList.filter((contact) => {
       return Object.values(contact).join('').toLowerCase().includes(search)
@@ -65,14 +66,17 @@ function App() {
     else {
       setSearchContactList(...contactList)
     }
+    setIsLoading(false)
   }
 
   const deleteContact = async (id) => {
+    setIsLoading(true)
     api.delete(`/contacts/${id}`)
     const newContactList = contactList.filter((contact) => {
       return contact.id !== id;
     });
     setContactList(newContactList);
+    setIsLoading(false)
   }
 
   return (
@@ -85,7 +89,9 @@ function App() {
               searchContact={searchContact}
               searchText={searchText}
               contactList={searchText?.length < 1 ? contactList : searchContactList}
-              deleteContact={deleteContact} />} />
+              deleteContact={deleteContact}
+              isLoading={isLoading}
+            />} />
           <Route path='/add' element={<AddContact addContact={addContact} />} />
           <Route path='/edit/:id' element={<EditContact updateContact={updateContact} />} />
           <Route path='/view/:id' element={<ContactDetails />} />
